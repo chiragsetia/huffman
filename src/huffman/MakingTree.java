@@ -43,7 +43,7 @@ public class MakingTree {
 			listNode.add(i, newNode);
 		}
 		mapFromTree(listNode.get(0),"");
-		System.out.println(old2New+"\n"+new2Old);
+		//System.out.println(old2New+"\n"+new2Old);
 		return new BothMaps(old2New,new2Old);
 		//return null;
 	}
