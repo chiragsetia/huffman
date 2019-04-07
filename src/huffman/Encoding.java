@@ -25,7 +25,7 @@ public class Encoding {
 				char ch=(char)value;
 				str+=map.get(ch);
 				if(str.length()>=7) {
-					output.write((char)Integer.parseInt(str.substring(0, 7), 2));//for coversion of string to int and radix tell use our source base in this case is binary
+					output.write((char)Integer.parseInt(str.substring(0, 7), 2));//for conversion of string to int and radix tell use our source base in this case is binary
 					str=str.substring(7);
 				}
 //				while(i<str.length()) {

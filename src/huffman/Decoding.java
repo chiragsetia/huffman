@@ -9,10 +9,10 @@ import java.io.File;
 
 public class Decoding {
 
-	public static void main(String[] args) {
-		System.out.println();
-	}
-	public void fileBack(String reducedFile,String orginal,HashMap<String, Character> map) {
+//	public static void main(String[] args) {
+//		System.out.println();
+//	}
+	public void fileBack(String reducedFile,String orginal) {
 		FileReader input=null;
 		FileWriter output=null;
 		FileWriter temp=null;
@@ -20,6 +20,7 @@ public class Decoding {
 			input=new FileReader(reducedFile+".txt");
 			output=new FileWriter(orginal);
 			temp=new FileWriter("temp.txt");
+			HashMap<String ,Character> map = fromTable("hashTable.txt");
 			int value;
 			String s1="";
 			int flag=0;
@@ -67,6 +68,43 @@ public class Decoding {
 			file.delete();
 		}
 	}
+private HashMap<String, Character> fromTable(String f) {
+	FileReader file=null;
+	HashMap<String, Character> map=null;
+	try {
+		file=new FileReader(f);
+		int value;
+		map=new HashMap<String, Character>();
+		String key="";
+		int flag=0;
+		while ((value=file.read())!=-1) {
+			if(value=='¿'&&flag==0) {
+				flag=1;
+			}else if(flag==1) {
+				flag=0;
+				map.put(key, (char)value);
+			}else if(value=='\n') {
+				key="";
+			}
+			else
+				key+=(char)value;
+		}
+	} catch (FileNotFoundException e) {
+		System.out.println("Map file is deleted :/n"+e);
+		e.printStackTrace();
+	} catch (IOException e) {
+		e.printStackTrace();
+	}finally {
+		try {
+			file.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	System.out.println(map);
+	return map;
+}
 	private String binaryStringForm(int value) {
 		String str=Integer.toString(value,2);
 		for(int i=str.length();i<7;i++) {
